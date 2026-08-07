@@ -1,9 +1,37 @@
+import { Route, Routes } from "react-router-dom"
+import RouterLayout from "@/components/RouterLayout.tsx"
+import HomePage from "@/pages/HomePage.tsx"
+import LoginPage from "@/pages/LoginPage.tsx"
+import RegisterPage from "@/pages/RegisterPage.tsx"
+import RacesPage from "@/pages/RacesPage.tsx"
+import SpellsPage from "@/pages/SpellsPage.tsx"
+import ClassesPage from "@/pages/ClassesPage.tsx"
+import ItemsPage from "@/pages/ItemsPage.tsx"
+import MonstersPage from "@/pages/MonstersPage.tsx"
+import ProtectedRoute from "@/components/ProtectedRoute.tsx"
+import RoleProtectedRoute from "@/components/RoleProtectedRoute.tsx"
+
 function App() {
-  return (
-      <div className="min-h-screen bg-slate-50">
-        <h1 className="text-2xl font-bold p-4">D&D Companion</h1>
-      </div>
-  )
+    return (
+        <Routes>
+            <Route element={<RouterLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="login" element={<LoginPage />} />
+                <Route path="register" element={<RegisterPage />} />
+
+                <Route element={<ProtectedRoute />}>
+                    <Route path="races" element={<RacesPage />} />
+                    <Route path="spells" element={<SpellsPage />} />
+                    <Route path="classes" element={<ClassesPage />} />
+                    <Route path="items" element={<ItemsPage />} />
+
+                    <Route element={<RoleProtectedRoute allowedRoles={["ADMIN", "GAME_MASTER"]} />}>
+                        <Route path="monsters" element={<MonstersPage />} />
+                    </Route>
+                </Route>
+            </Route>
+        </Routes>
+    )
 }
 
 export default App
