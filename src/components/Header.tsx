@@ -24,6 +24,9 @@ const Header = () => {
                             )}
                         </>
                     )}
+                    {!isAuthenticated && (
+                        <Link to="/register">Register</Link>
+                    )}
                     <AuthButton />
                 </div>
             </div>

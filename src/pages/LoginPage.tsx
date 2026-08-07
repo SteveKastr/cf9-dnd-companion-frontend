@@ -7,6 +7,7 @@ import { zodResolver } from "@hookform/resolvers/zod"
 import { useAuth } from "@/context/AuthContext.ts"
 import { toast } from "sonner"
 import { useNavigate } from "react-router-dom"
+import { Link } from "react-router-dom"
 
 export default function LoginPage() {
     const { loginUser } = useAuth()
@@ -56,6 +57,13 @@ export default function LoginPage() {
             <Button type="submit" className="w-full" disabled={isSubmitting}>
                 {isSubmitting ? "Logging in..." : "Login"}
             </Button>
+
+            <p className="text-center text-sm text-muted-foreground">
+                Don't have an account?{" "}
+                <Link to="/register" className="underline hover:text-foreground">
+                    Register here
+                </Link>
+            </p>
         </form>
     )
 }
