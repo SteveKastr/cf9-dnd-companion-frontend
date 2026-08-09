@@ -11,6 +11,7 @@ import MonstersPage from "@/pages/MonstersPage.tsx"
 import ProtectedRoute from "@/components/ProtectedRoute.tsx"
 import RoleProtectedRoute from "@/components/RoleProtectedRoute.tsx"
 import RaceDetailPage from "@/pages/RaceDetailPage.tsx"
+import ClassDetailPage from "@/pages/ClassDetailPage.tsx"
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="races/:raceIndex" element={<RaceDetailPage />} />
                     <Route path="spells" element={<SpellsPage />} />
                     <Route path="classes" element={<ClassesPage />} />
+                    <Route path="classes/:classIndex" element={<ClassDetailPage />} />
                     <Route path="items" element={<ItemsPage />} />
 
                     <Route element={<RoleProtectedRoute allowedRoles={["ADMIN", "GAME_MASTER"]} />}>
