@@ -2,6 +2,8 @@ import { useParams, Link } from "react-router-dom"
 import { useQuery, useQueries } from "@tanstack/react-query"
 import { getClassByIndex } from "@/api/classes.ts"
 import { getSubclassByIndex } from "@/api/subclasses.ts"
+import { getLevelsByClassName } from "@/api/levels.ts"
+import { getFeatureByIndex } from "@/api/features.ts"
 import { Card } from "@/components/ui/card.tsx"
 import { Button } from "@/components/ui/button.tsx"
 
@@ -140,6 +142,11 @@ export default function ClassDetailPage() {
                         <SubclassesList subclassIndexes={characterClass.subclasses.map((s) => s.index)} />
                     </div>
                 )}
+
+                <div>
+                    <h2 className="font-semibold mb-2">Class Features by Level</h2>
+                    <LevelsList className={characterClass.name} />
+                </div>
             </Card>
         </div>
     )
@@ -172,6 +179,88 @@ function SubclassesList({ subclassIndexes }: { subclassIndexes: string[] }) {
                 )
             })}
         </div>
+    )
+}
+
+function LevelsList({ className }: { className: string }) {
+    const { data: levels, isLoading, error } = useQuery({
+        queryKey: ["levels", className],
+        queryFn: () => getLevelsByClassName(className),
+    })
+
+    if (isLoading) {
+        return <p className="text-sm text-muted-foreground">Loading levels...</p>
+    }
+
+    if (error || !levels) {
+        return null
+    }
+
+    return (
+        <div className="space-y-4">
+            {levels
+                .sort((a, b) => a.level - b.level)
+                .map((lvl) => (
+                    <div key={lvl.index} className="border-l-2 pl-3 space-y-1">
+                        <h3 className="font-semibold">Level {lvl.level}</h3>
+
+                        {lvl.features.length > 0 && (
+                            <FeaturesList featureIndexes={lvl.features.map((f) => f.index)} />
+                        )}
+
+                        {lvl.classSpecific && Object.keys(lvl.classSpecific).length > 0 && (
+                            <ClassSpecificText data={lvl.classSpecific} />
+                        )}
+                    </div>
+                ))}
+        </div>
+    )
+}
+
+function FeaturesList({ featureIndexes }: { featureIndexes: string[] }) {
+    const featureQueries = useQueries({
+        queries: featureIndexes.map((index) => ({
+            queryKey: ["features", index],
+            queryFn: () => getFeatureByIndex(index),
+        })),
+    })
+
+    return (
+        <div className="space-y-2">
+            {featureQueries.map((query, i) => {
+                if (query.isLoading) {
+                    return <p key={i} className="text-sm text-muted-foreground">Loading feature...</p>
+                }
+                if (query.error || !query.data) {
+                    return null
+                }
+                return (
+                    <div key={query.data.index} className="text-sm">
+                        <span className="font-medium">{query.data.name}:</span>{" "}
+                        {query.data.desc.join(" ")}
+                    </div>
+                )
+            })}
+        </div>
+    )
+}
+
+function formatKey(key: string): string {
+    return key
+        .split("_")
+        .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+        .join(" ")
+}
+
+function ClassSpecificText({ data }: { data: Record<string, unknown> }) {
+    const entries = Object.entries(data).filter(([, value]) => value !== 0 && value !== null)
+
+    if (entries.length === 0) return null
+
+    return (
+        <p className="text-sm text-muted-foreground">
+            {entries.map(([key, value]) => `${formatKey(key)}: ${String(value)}`).join(" · ")}
+        </p>
     )
 }
 
