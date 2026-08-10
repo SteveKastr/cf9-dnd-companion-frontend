@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useQuery } from "@tanstack/react-query"
 import { getSpellByIndex } from "@/api/spells.ts"
 import { Card } from "@/components/ui/card.tsx"
@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button.tsx"
 
 export default function SpellDetailPage() {
     const { spellIndex } = useParams<{ spellIndex: string }>()
+    const navigate = useNavigate()
 
     const { data: spell, isLoading, error } = useQuery({
         queryKey: ["spells", spellIndex],
@@ -27,9 +28,9 @@ export default function SpellDetailPage() {
 
     return (
         <div className="p-4 max-w-3xl mx-auto space-y-6">
-            <Link to="/spells">
-                <Button variant="secondary">&larr; Back to Spells</Button>
-            </Link>
+            <Button variant="secondary" onClick={() => navigate(-1)}>
+                &larr; Back
+            </Button>
 
             <Card className="p-6 space-y-4">
                 <div>

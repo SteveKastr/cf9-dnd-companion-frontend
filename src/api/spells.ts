@@ -1,14 +1,19 @@
 import { apiFetch } from "@/api/client.ts"
 import type { Spell, PagedResponse } from "@/types/spell.ts"
 
-export async function getSpells(page: number, size: number = 20): Promise<PagedResponse<Spell>> {
-    return apiFetch(`/spells?page=${page}&size=${size}`)
+export async function getSpells(
+    page: number,
+    size: number = 20,
+    level?: number,
+    className?: string
+): Promise<PagedResponse<Spell>> {
+    const params = new URLSearchParams({ page: String(page), size: String(size) })
+    if (level !== undefined) params.set("level", String(level))
+    if (className) params.set("className", className)
+
+    return apiFetch(`/spells?${params.toString()}`)
 }
 
 export async function getSpellByIndex(index: string): Promise<Spell> {
     return apiFetch(`/spells/${index}`)
-}
-
-export async function getSpellsByLevel(level: number): Promise<Spell[]> {
-    return apiFetch(`/spells/level/${level}`)
 }
