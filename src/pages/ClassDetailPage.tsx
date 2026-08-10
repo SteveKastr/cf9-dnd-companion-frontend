@@ -2,10 +2,11 @@ import { useParams, Link } from "react-router-dom"
 import { useQuery, useQueries } from "@tanstack/react-query"
 import { getClassByIndex } from "@/api/classes.ts"
 import { getSubclassByIndex } from "@/api/subclasses.ts"
-import { getLevelsByClassName } from "@/api/levels.ts"
+import { getLevelsByClassName, getLevelsBySubclassName } from "@/api/levels.ts"
 import { getFeatureByIndex } from "@/api/features.ts"
 import { Card } from "@/components/ui/card.tsx"
 import { Button } from "@/components/ui/button.tsx"
+import type { LevelSpellcasting } from "@/types/level.ts"
 
 export default function ClassDetailPage() {
     const { classIndex } = useParams<{ classIndex: string }>()
@@ -136,6 +137,11 @@ export default function ClassDetailPage() {
                     </div>
                 )}
 
+                <div>
+                    <h2 className="font-semibold mb-2">Class Features by Level</h2>
+                    <LevelsList className={characterClass.name} />
+                </div>
+
                 {characterClass.subclasses.length > 0 && (
                     <div>
                         <h2 className="font-semibold mb-2">Subclasses</h2>
@@ -143,10 +149,6 @@ export default function ClassDetailPage() {
                     </div>
                 )}
 
-                <div>
-                    <h2 className="font-semibold mb-2">Class Features by Level</h2>
-                    <LevelsList className={characterClass.name} />
-                </div>
             </Card>
         </div>
     )
@@ -171,13 +173,53 @@ function SubclassesList({ subclassIndexes }: { subclassIndexes: string[] }) {
                 }
                 const subclass = query.data
                 return (
-                    <div key={subclass.index} className="border-l-2 pl-3 space-y-1">
+                    <div key={subclass.index} className="border-l-2 pl-3 space-y-2">
                         <h3 className="font-semibold">{subclass.name}</h3>
                         <p className="text-sm text-muted-foreground italic">{subclass.subclassFlavor}</p>
                         <p className="text-sm">{subclass.desc.join(" ")}</p>
+
+                        <div className="mt-2">
+                            <h4 className="font-medium text-sm mb-1">Features by Level</h4>
+                            <SubclassLevelsList subclassName={subclass.name} />
+                        </div>
                     </div>
                 )
             })}
+        </div>
+    )
+}
+
+function SubclassLevelsList({ subclassName }: { subclassName: string }) {
+    const { data: levels, isLoading, error } = useQuery({
+        queryKey: ["levels", "subclass", subclassName],
+        queryFn: () => getLevelsBySubclassName(subclassName),
+    })
+
+    if (isLoading) {
+        return <p className="text-sm text-muted-foreground">Loading levels...</p>
+    }
+
+    if (error || !levels || levels.length === 0) {
+        return null
+    }
+
+    return (
+        <div className="space-y-3">
+            {levels
+                .sort((a, b) => a.level - b.level)
+                .map((lvl) => (
+                    <div key={lvl.index} className="border-l-2 pl-3 space-y-1">
+                        <h5 className="font-medium text-sm">Level {lvl.level}</h5>
+
+                        {lvl.features.length > 0 && (
+                            <FeaturesList featureIndexes={lvl.features.map((f) => f.index)} />
+                        )}
+
+                        {lvl.subclassSpecific && Object.keys(lvl.subclassSpecific).length > 0 && (
+                            <ClassSpecificText data={lvl.subclassSpecific} />
+                        )}
+                    </div>
+                ))}
         </div>
     )
 }
@@ -211,6 +253,8 @@ function LevelsList({ className }: { className: string }) {
                         {lvl.classSpecific && Object.keys(lvl.classSpecific).length > 0 && (
                             <ClassSpecificText data={lvl.classSpecific} />
                         )}
+
+                        {lvl.spellcasting && <SpellcastingText spellcasting={lvl.spellcasting} />}
                     </div>
                 ))}
         </div>
@@ -323,6 +367,37 @@ function ChoiceText({ choice }: { choice: unknown }) {
         <p className="text-sm">
             {c.choose && c.choose > 1 ? `Choose ${c.choose}: ` : ""}
             {text}
+        </p>
+    )
+}
+
+function SpellcastingText({ spellcasting }: { spellcasting: LevelSpellcasting }) {
+    const slots: string[] = []
+
+    for (let i = 1; i <= 9; i++) {
+        const key = `spell_slots_level_${i}` as keyof LevelSpellcasting
+        const value = spellcasting[key]
+        if (typeof value === "number" && value > 0) {
+            slots.push(`Lvl ${i}: ${value}`)
+        }
+    }
+
+    const parts: string[] = []
+    if (typeof spellcasting.cantripsKnown === "number") {
+        parts.push(`Cantrips Known: ${spellcasting.cantripsKnown}`)
+    }
+    if (typeof spellcasting.spellsKnown === "number") {
+        parts.push(`Spells Known: ${spellcasting.spellsKnown}`)
+    }
+    if (slots.length > 0) {
+        parts.push(`Spell Slots — ${slots.join(", ")}`)
+    }
+
+    if (parts.length === 0) return null
+
+    return (
+        <p className="text-sm text-muted-foreground">
+            {parts.join(" · ")}
         </p>
     )
 }

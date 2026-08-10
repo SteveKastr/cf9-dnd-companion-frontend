@@ -4,3 +4,6 @@ import type { Level } from "@/types/level.ts"
 export async function getLevelsByClassName(className: string): Promise<Level[]> {
     return apiFetch(`/levels?className=${encodeURIComponent(className)}`)
 }
+export async function getLevelsBySubclassName(subclassName: string): Promise<Level[]> {
+    return apiFetch(`/levels?subclassName=${encodeURIComponent(subclassName)}`)
+}

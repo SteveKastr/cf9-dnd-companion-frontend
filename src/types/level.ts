@@ -2,15 +2,15 @@ import type { ApiReference } from "@/types/common.ts"
 
 export type LevelSpellcasting = {
     cantripsKnown?: number
-    spellSlotsLevel1: number
-    spellSlotsLevel2: number
-    spellSlotsLevel3: number
-    spellSlotsLevel4: number
-    spellSlotsLevel5: number
-    spellSlotsLevel6?: number
-    spellSlotsLevel7?: number
-    spellSlotsLevel8?: number
-    spellSlotsLevel9?: number
+    spell_slots_level_1: number
+    spell_slots_level_2: number
+    spell_slots_level_3: number
+    spell_slots_level_4: number
+    spell_slots_level_5: number
+    spell_slots_level_6?: number
+    spell_slots_level_7?: number
+    spell_slots_level_8?: number
+    spell_slots_level_9?: number
     spellsKnown?: number
 }
 
