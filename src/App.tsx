@@ -12,6 +12,7 @@ import ProtectedRoute from "@/components/ProtectedRoute.tsx"
 import RoleProtectedRoute from "@/components/RoleProtectedRoute.tsx"
 import RaceDetailPage from "@/pages/RaceDetailPage.tsx"
 import ClassDetailPage from "@/pages/ClassDetailPage.tsx"
+import SpellDetailPage from "@/pages/SpellDetailPage.tsx"
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="races" element={<RacesPage />} />
                     <Route path="races/:raceIndex" element={<RaceDetailPage />} />
                     <Route path="spells" element={<SpellsPage />} />
+                    <Route path="spells/:spellIndex" element={<SpellDetailPage />} />
                     <Route path="classes" element={<ClassesPage />} />
                     <Route path="classes/:classIndex" element={<ClassDetailPage />} />
                     <Route path="items" element={<ItemsPage />} />
