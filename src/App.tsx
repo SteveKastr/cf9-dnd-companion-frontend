@@ -13,6 +13,7 @@ import RoleProtectedRoute from "@/components/RoleProtectedRoute.tsx"
 import RaceDetailPage from "@/pages/RaceDetailPage.tsx"
 import ClassDetailPage from "@/pages/ClassDetailPage.tsx"
 import SpellDetailPage from "@/pages/SpellDetailPage.tsx"
+import ItemDetailPage from "@/pages/ItemDetailPage.tsx"
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path="classes" element={<ClassesPage />} />
                     <Route path="classes/:classIndex" element={<ClassDetailPage />} />
                     <Route path="items" element={<ItemsPage />} />
+                    <Route path="items/:itemIndex" element={<ItemDetailPage />} />
 
                     <Route element={<RoleProtectedRoute allowedRoles={["ADMIN", "GAME_MASTER"]} />}>
                         <Route path="monsters" element={<MonstersPage />} />

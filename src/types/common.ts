@@ -4,3 +4,13 @@ export type ApiReference = {
     url: string
     note?: string | null
 }
+
+export type PagedResponse<T> = {
+    content: T[]
+    page: {
+        size: number
+        number: number
+        totalElements: number
+        totalPages: number
+    }
+}

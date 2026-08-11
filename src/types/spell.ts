@@ -42,12 +42,3 @@ export type Spell = {
     url: string
 }
 
-export type PagedResponse<T> = {
-    content: T[]
-    page: {
-        size: number
-        number: number
-        totalElements: number
-        totalPages: number
-    }
-}

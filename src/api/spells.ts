@@ -1,5 +1,6 @@
 import { apiFetch } from "@/api/client.ts"
-import type { Spell, PagedResponse } from "@/types/spell.ts"
+import type { Spell } from "@/types/spell.ts"
+import type { PagedResponse } from "@/types/common.ts"
 
 export async function getSpells(
     page: number,
