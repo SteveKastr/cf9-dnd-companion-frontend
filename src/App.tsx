@@ -14,6 +14,7 @@ import RaceDetailPage from "@/pages/RaceDetailPage.tsx"
 import ClassDetailPage from "@/pages/ClassDetailPage.tsx"
 import SpellDetailPage from "@/pages/SpellDetailPage.tsx"
 import ItemDetailPage from "@/pages/ItemDetailPage.tsx"
+import CharacterBuildingPage from "@/pages/CharacterBuildingPage.tsx"
 
 function App() {
     return (
@@ -30,6 +31,7 @@ function App() {
                     <Route path="spells/:spellIndex" element={<SpellDetailPage />} />
                     <Route path="classes" element={<ClassesPage />} />
                     <Route path="classes/:classIndex" element={<ClassDetailPage />} />
+                    <Route path="backgrounds-feats" element={<CharacterBuildingPage />} />
                     <Route path="items" element={<ItemsPage />} />
                     <Route path="items/:itemIndex" element={<ItemDetailPage />} />
 

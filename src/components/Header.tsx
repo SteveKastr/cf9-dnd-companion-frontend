@@ -18,6 +18,7 @@ const Header = () => {
                             <Link to="/races">Races</Link>
                             <Link to="/spells">Spells</Link>
                             <Link to="/classes">Classes</Link>
+                            <Link to="/backgrounds-feats">Backgrounds / Feats</Link>
                             <Link to="/items">Items</Link>
                             {(role === "ADMIN" || role === "GAME_MASTER") && (
                                 <Link to="/monsters">Monsters</Link>

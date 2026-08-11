@@ -244,7 +244,10 @@ function LevelsList({ className }: { className: string }) {
                 .sort((a, b) => a.level - b.level)
                 .map((lvl) => (
                     <div key={lvl.index} className="border-l-2 pl-3 space-y-1">
-                        <h3 className="font-semibold">Level {lvl.level}</h3>
+                        <h3 className="font-semibold">
+                            Level {lvl.level}
+                            {lvl.profBonus !== undefined ? ` (Proficiency Bonus +${lvl.profBonus})` : ""}
+                        </h3>
 
                         {lvl.features.length > 0 && (
                             <FeaturesList featureIndexes={lvl.features.map((f) => f.index)} />
