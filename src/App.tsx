@@ -15,6 +15,7 @@ import ClassDetailPage from "@/pages/ClassDetailPage.tsx"
 import SpellDetailPage from "@/pages/SpellDetailPage.tsx"
 import ItemDetailPage from "@/pages/ItemDetailPage.tsx"
 import CharacterBuildingPage from "@/pages/CharacterBuildingPage.tsx"
+import MonsterDetailPage from "@/pages/MonsterDetailPage.tsx"
 
 function App() {
     return (
@@ -37,6 +38,7 @@ function App() {
 
                     <Route element={<RoleProtectedRoute allowedRoles={["ADMIN", "GAME_MASTER"]} />}>
                         <Route path="monsters" element={<MonstersPage />} />
+                        <Route path="monsters/:monsterIndex" element={<MonsterDetailPage />} />
                     </Route>
                 </Route>
             </Route>
