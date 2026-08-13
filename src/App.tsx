@@ -16,6 +16,8 @@ import SpellDetailPage from "@/pages/SpellDetailPage.tsx"
 import ItemDetailPage from "@/pages/ItemDetailPage.tsx"
 import CharacterBuildingPage from "@/pages/CharacterBuildingPage.tsx"
 import MonsterDetailPage from "@/pages/MonsterDetailPage.tsx"
+import RulesPage from "@/pages/RulesPage.tsx"
+import RuleDetailPage from "@/pages/RuleDetailPage.tsx"
 
 function App() {
     return (
@@ -35,6 +37,8 @@ function App() {
                     <Route path="backgrounds-feats" element={<CharacterBuildingPage />} />
                     <Route path="items" element={<ItemsPage />} />
                     <Route path="items/:itemIndex" element={<ItemDetailPage />} />
+                    <Route path="rules" element={<RulesPage />} />
+                    <Route path="rules/:ruleIndex" element={<RuleDetailPage />} />
 
                     <Route element={<RoleProtectedRoute allowedRoles={["ADMIN", "GAME_MASTER"]} />}>
                         <Route path="monsters" element={<MonstersPage />} />
