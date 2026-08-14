@@ -5,6 +5,7 @@ import { getRuleSectionByIndex } from "@/api/ruleSections.ts"
 import { Card } from "@/components/ui/card.tsx"
 import { Button } from "@/components/ui/button.tsx"
 import ReactMarkdown from "react-markdown"
+import remarkGfm from "remark-gfm"
 
 export default function RuleDetailPage() {
     const { ruleIndex } = useParams<{ ruleIndex: string }>()
@@ -36,7 +37,7 @@ export default function RuleDetailPage() {
 
             <Card className="p-6 space-y-6">
                 <div className="prose prose-sm max-w-none">
-                    <ReactMarkdown>{rule.desc}</ReactMarkdown>
+                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{rule.desc}</ReactMarkdown>
                 </div>
 
                 {rule.subsections.length > 0 && (
@@ -66,7 +67,7 @@ function RuleSectionsList({ sectionIndexes }: { sectionIndexes: string[] }) {
                 }
                 return (
                     <div key={query.data.index} className="prose prose-sm max-w-none border-t pt-4">
-                        <ReactMarkdown>{query.data.desc}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{query.data.desc}</ReactMarkdown>
                     </div>
                 )
             })}
