@@ -24,6 +24,7 @@ const Header = () => {
                             {(role === "ADMIN" || role === "GAME_MASTER") && (
                                 <Link to="/monsters">Monsters</Link>
                             )}
+                            {role === "ADMIN" && <Link to="/admin/users">Users</Link>}
                         </>
                     )}
                     {!isAuthenticated && (
