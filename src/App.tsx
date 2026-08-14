@@ -18,6 +18,7 @@ import CharacterBuildingPage from "@/pages/CharacterBuildingPage.tsx"
 import MonsterDetailPage from "@/pages/MonsterDetailPage.tsx"
 import RulesPage from "@/pages/RulesPage.tsx"
 import RuleDetailPage from "@/pages/RuleDetailPage.tsx"
+import AdminUsersPage from "@/pages/AdminUsersPage.tsx"
 
 function App() {
     return (
@@ -43,6 +44,9 @@ function App() {
                     <Route element={<RoleProtectedRoute allowedRoles={["ADMIN", "GAME_MASTER"]} />}>
                         <Route path="monsters" element={<MonstersPage />} />
                         <Route path="monsters/:monsterIndex" element={<MonsterDetailPage />} />
+                    </Route>
+                    <Route element={<RoleProtectedRoute allowedRoles={["ADMIN"]} />}>
+                        <Route path="admin/users" element={<AdminUsersPage />} />
                     </Route>
                 </Route>
             </Route>

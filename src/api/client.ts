@@ -2,7 +2,7 @@ import { getCookie } from "@/utils/cookies.ts"
 
 const API_URL = import.meta.env.VITE_API_URL
 
-export async function apiFetch(path: string, options: RequestInit = {}) {
+export async function apiFetch<T = unknown>(path: string, options: RequestInit = {}): Promise<T> {
     const token = getCookie("access_token")
 
     const res = await fetch(API_URL + path, {
@@ -23,6 +23,10 @@ export async function apiFetch(path: string, options: RequestInit = {}) {
             console.error("Error parsing error response", error)
         }
         throw new Error(message)
+    }
+
+    if (res.status === 204) {
+        return undefined as T
     }
 
     return res.json()
