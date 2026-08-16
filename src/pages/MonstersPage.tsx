@@ -67,79 +67,85 @@ export default function MonstersPage() {
     }
 
     return (
-        <div className="p-4">
-            <h1 className="text-2xl font-bold mb-4">Monsters</h1>
+        <div className="relative min-h-screen">
+            <div
+                className="fixed inset-0 -z-10 bg-cover bg-center"
+                style={{ backgroundImage: "url(/images/monsters-bg.jpg)" }}
+            />
+            <div className="p-4">
+                <h1 className="text-2xl font-bold mb-4">Monsters</h1>
 
-            <div className="flex flex-wrap gap-4 mb-6">
-                <Input
-                    placeholder="Search by name..."
-                    value={searchFilter}
-                    onChange={(e) => handleSearchChange(e.target.value)}
-                    className="max-w-xs"
-                />
-
-                <select
-                    value={typeFilter}
-                    onChange={(e) => handleTypeChange(e.target.value)}
-                    className="rounded-md border border-input bg-transparent px-3 py-2 text-sm"
-                >
-                    <option value="">All Types</option>
-                    {MONSTER_TYPES.map((t) => (
-                        <option key={t} value={t}>
-                            {t.charAt(0).toUpperCase() + t.slice(1)}
-                        </option>
-                    ))}
-                </select>
-
-                <select
-                    value={crFilter}
-                    onChange={(e) => handleCrChange(e.target.value)}
-                    className="rounded-md border border-input bg-transparent px-3 py-2 text-sm"
-                >
-                    <option value="">All Challenge Ratings</option>
-                    {CHALLENGE_RATINGS.map((cr) => (
-                        <option key={cr.value} value={cr.value}>
-                            CR {cr.label}
-                        </option>
-                    ))}
-                </select>
-            </div>
-
-            {isLoading && <p>Loading monsters...</p>}
-
-            {error && (
-                <p className="text-red-600">
-                    Error: {error instanceof Error ? error.message : "Failed to load monsters"}
-                </p>
-            )}
-
-            {data && (
-                <>
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                        {data.content.map((monster) => (
-                            <Link key={monster.id} to={`/monsters/${monster.index}`}>
-                                <Card className="p-4 space-y-2 cursor-pointer hover:border-primary/50 hover:bg-accent transition-colors h-full">
-                                    <h2 className="text-xl font-semibold">{monster.name}</h2>
-                                    <p className="text-sm text-muted-foreground">
-                                        {monster.size} {monster.type}
-                                    </p>
-                                    <p className="text-sm">CR {monster.challengeRating} — {monster.xp} XP</p>
-                                </Card>
-                            </Link>
-                        ))}
-                    </div>
-
-                    {data.content.length === 0 && (
-                        <p className="text-muted-foreground">No monsters found matching these filters.</p>
-                    )}
-
-                    <PaginationControls
-                        currentPage={data.page.number}
-                        totalPages={data.page.totalPages}
-                        onPageChange={handlePageChange}
+                <div className="flex flex-wrap gap-4 mb-6">
+                    <Input
+                        placeholder="Search by name..."
+                        value={searchFilter}
+                        onChange={(e) => handleSearchChange(e.target.value)}
+                        className="max-w-xs bg-white"
                     />
-                </>
-            )}
+
+                    <select
+                        value={typeFilter}
+                        onChange={(e) => handleTypeChange(e.target.value)}
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                    >
+                        <option value="">All Types</option>
+                        {MONSTER_TYPES.map((t) => (
+                            <option key={t} value={t}>
+                                {t.charAt(0).toUpperCase() + t.slice(1)}
+                            </option>
+                        ))}
+                    </select>
+
+                    <select
+                        value={crFilter}
+                        onChange={(e) => handleCrChange(e.target.value)}
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                    >
+                        <option value="">All Challenge Ratings</option>
+                        {CHALLENGE_RATINGS.map((cr) => (
+                            <option key={cr.value} value={cr.value}>
+                                CR {cr.label}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                {isLoading && <p>Loading monsters...</p>}
+
+                {error && (
+                    <p className="text-red-600">
+                        Error: {error instanceof Error ? error.message : "Failed to load monsters"}
+                    </p>
+                )}
+
+                {data && (
+                    <>
+                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {data.content.map((monster) => (
+                                <Link key={monster.id} to={`/monsters/${monster.index}`}>
+                                    <Card className="p-4 space-y-2 cursor-pointer hover:border-primary/50 hover:bg-accent transition-colors h-full">
+                                        <h2 className="text-xl font-semibold">{monster.name}</h2>
+                                        <p className="text-sm text-muted-foreground">
+                                            {monster.size} {monster.type}
+                                        </p>
+                                        <p className="text-sm">CR {monster.challengeRating} — {monster.xp} XP</p>
+                                    </Card>
+                                </Link>
+                            ))}
+                        </div>
+
+                        {data.content.length === 0 && (
+                            <p className="text-muted-foreground">No monsters found matching these filters.</p>
+                        )}
+
+                        <PaginationControls
+                            currentPage={data.page.number}
+                            totalPages={data.page.totalPages}
+                            onPageChange={handlePageChange}
+                        />
+                    </>
+                )}
+            </div>
         </div>
     )
 }
