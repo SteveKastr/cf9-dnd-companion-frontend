@@ -25,7 +25,7 @@ export default function SpellsPage() {
         queryFn: () =>
             getSpells(
                 currentPage,
-                20,
+                18,
                 levelFilter === "" ? undefined : Number(levelFilter),
                 classFilter === "" ? undefined : classFilter
             ),

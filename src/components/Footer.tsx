@@ -18,6 +18,13 @@ const Footer = () => {
                     </a>
                     .
                 </p>
+                <p className="text-slate-500 text-xs">
+                    Icons by{" "}
+                    <a href="https://fontawesome.com" target="_blank" rel="noopener noreferrer" className="underline">
+                        Font Awesome
+                    </a>{" "}
+                    (CC BY 4.0)
+                </p>
             </div>
         </footer>
     )

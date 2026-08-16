@@ -29,7 +29,7 @@ export default function ItemsPage() {
         queryFn: () =>
             getItems(
                 currentPage,
-                20,
+                18,
                 categoryFilter === "" ? undefined : categoryFilter,
                 typeFilter === "" ? undefined : typeFilter
             ),

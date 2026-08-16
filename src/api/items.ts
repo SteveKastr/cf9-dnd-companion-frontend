@@ -4,7 +4,7 @@ import type { PagedResponse } from "@/types/common.ts"
 
 export async function getItems(
     page: number,
-    size: number = 20,
+    size: number = 18,
     category?: string,
     itemType?: string
 ): Promise<PagedResponse<Item>> {

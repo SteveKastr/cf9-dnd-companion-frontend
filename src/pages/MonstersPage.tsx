@@ -31,7 +31,7 @@ export default function MonstersPage() {
         queryFn: () =>
             getMonsters(
                 currentPage,
-                20,
+                18,
                 typeFilter || undefined,
                 crFilter === "" ? undefined : Number(crFilter),
                 searchFilter || undefined

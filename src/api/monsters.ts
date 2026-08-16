@@ -4,7 +4,7 @@ import type { PagedResponse } from "@/types/common.ts"
 
 export async function getMonsters(
     page: number,
-    size: number = 20,
+    size: number = 18,
     type?: string,
     challengeRating?: number,
     search?: string
