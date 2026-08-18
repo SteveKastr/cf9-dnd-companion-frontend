@@ -30,126 +30,132 @@ export default function ClassDetailPage() {
     }
 
     return (
-        <div className="p-4 max-w-3xl mx-auto space-y-6">
-            <Link to="/classes">
-                <Button variant="secondary">&larr; Back to Classes</Button>
-            </Link>
+        <div className="relative min-h-screen">
+            <div
+                className="fixed inset-0 -z-10 bg-cover bg-center"
+                style={{ backgroundImage: "url(/images/classes-bg.jpg)" }}
+            />
+            <div className="p-4 max-w-3xl mx-auto space-y-6">
+                <Link to="/classes">
+                    <Button variant="secondary">&larr; Back to Classes</Button>
+                </Link>
 
-            <Card className="p-6 space-y-4">
-                <h1 className="text-3xl font-bold">{characterClass.name}</h1>
+                <Card className="p-6 space-y-4">
+                    <h1 className="text-3xl font-bold">{characterClass.name}</h1>
 
-                <p className="text-sm">
-                    <span className="font-semibold">Hit Die:</span> d{characterClass.hitDie}
-                </p>
+                    <p className="text-sm">
+                        <span className="font-semibold">Hit Die:</span> d{characterClass.hitDie}
+                    </p>
 
-                {characterClass.savingThrows && characterClass.savingThrows.length > 0 && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Saving Throws</h2>
-                        <p className="text-sm">
-                            {characterClass.savingThrows.map((st) => st.name).join(", ")}
-                        </p>
-                    </div>
-                )}
+                    {characterClass.savingThrows && characterClass.savingThrows.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Saving Throws</h2>
+                            <p className="text-sm">
+                                {characterClass.savingThrows.map((st) => st.name).join(", ")}
+                            </p>
+                        </div>
+                    )}
 
-                {characterClass.proficiencies && characterClass.proficiencies.length > 0 && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Proficiencies</h2>
-                        <ul className="list-disc list-inside text-sm">
-                            {characterClass.proficiencies.map((p) => (
-                                <li key={p.index}>{p.name}</li>
+                    {characterClass.proficiencies && characterClass.proficiencies.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Proficiencies</h2>
+                            <ul className="list-disc list-inside text-sm">
+                                {characterClass.proficiencies.map((p) => (
+                                    <li key={p.index}>{p.name}</li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
+
+                    {characterClass.proficiencyChoices && characterClass.proficiencyChoices.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Proficiency Choices</h2>
+                            {characterClass.proficiencyChoices.map((choice, i) => (
+                                <ChoiceText key={i} choice={choice} />
                             ))}
-                        </ul>
-                    </div>
-                )}
+                        </div>
+                    )}
 
-                {characterClass.proficiencyChoices && characterClass.proficiencyChoices.length > 0 && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Proficiency Choices</h2>
-                        {characterClass.proficiencyChoices.map((choice, i) => (
-                            <ChoiceText key={i} choice={choice} />
-                        ))}
-                    </div>
-                )}
+                    {characterClass.startingEquipment && characterClass.startingEquipment.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Starting Equipment</h2>
+                            <ul className="list-disc list-inside text-sm">
+                                {characterClass.startingEquipment.map((se, i) => (
+                                    <li key={i}>
+                                        {se.equipment.name} x{se.quantity}
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    )}
 
-                {characterClass.startingEquipment && characterClass.startingEquipment.length > 0 && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Starting Equipment</h2>
-                        <ul className="list-disc list-inside text-sm">
-                            {characterClass.startingEquipment.map((se, i) => (
-                                <li key={i}>
-                                    {se.equipment.name} x{se.quantity}
-                                </li>
+                    {characterClass.startingEquipmentOptions && characterClass.startingEquipmentOptions.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Additional Equipment Choices</h2>
+                            {characterClass.startingEquipmentOptions.map((choice, i) => (
+                                <ChoiceText key={i} choice={choice} />
                             ))}
-                        </ul>
-                    </div>
-                )}
+                        </div>
+                    )}
 
-                {characterClass.startingEquipmentOptions && characterClass.startingEquipmentOptions.length > 0 && (
+                    {characterClass.multiClassing && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Multi-Classing</h2>
+
+                            {characterClass.multiClassing.prerequisites &&
+                                characterClass.multiClassing.prerequisites.length > 0 && (
+                                    <p className="text-sm">
+                                        Requires:{" "}
+                                        {characterClass.multiClassing.prerequisites
+                                            .map((p) => `${p.abilityScore.name} ${p.minimumScore}+`)
+                                            .join(", ")}
+                                    </p>
+                                )}
+
+                            {characterClass.multiClassing.proficiencies &&
+                                characterClass.multiClassing.proficiencies.length > 0 && (
+                                    <p className="text-sm">
+                                        Grants proficiency:{" "}
+                                        {characterClass.multiClassing.proficiencies.map((p) => p.name).join(", ")}
+                                    </p>
+                                )}
+
+                            {characterClass.multiClassing.proficiencyChoices?.map((choice, i) => (
+                                <ChoiceText key={i} choice={choice} />
+                            ))}
+                        </div>
+                    )}
+
+                    {characterClass.spellcasting && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Spellcasting</h2>
+                            <p className="text-sm">
+                                <span className="font-medium">Ability:</span>{" "}
+                                {characterClass.spellcasting.spellcastingAbility.name}
+                            </p>
+                            {characterClass.spellcasting.info.map((info, i) => (
+                                <div key={i} className="mt-2">
+                                    <p className="text-sm font-medium">{info.name}</p>
+                                    <p className="text-sm text-muted-foreground">{info.desc.join(" ")}</p>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
                     <div>
-                        <h2 className="font-semibold mb-2">Additional Equipment Choices</h2>
-                        {characterClass.startingEquipmentOptions.map((choice, i) => (
-                            <ChoiceText key={i} choice={choice} />
-                        ))}
+                        <h2 className="font-semibold mb-2">Class Features by Level</h2>
+                        <LevelsList className={characterClass.name} />
                     </div>
-                )}
 
-                {characterClass.multiClassing && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Multi-Classing</h2>
+                    {characterClass.subclasses.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Subclasses</h2>
+                            <SubclassesList subclassIndexes={characterClass.subclasses.map((s) => s.index)} />
+                        </div>
+                    )}
 
-                        {characterClass.multiClassing.prerequisites &&
-                            characterClass.multiClassing.prerequisites.length > 0 && (
-                                <p className="text-sm">
-                                    Requires:{" "}
-                                    {characterClass.multiClassing.prerequisites
-                                        .map((p) => `${p.abilityScore.name} ${p.minimumScore}+`)
-                                        .join(", ")}
-                                </p>
-                            )}
-
-                        {characterClass.multiClassing.proficiencies &&
-                            characterClass.multiClassing.proficiencies.length > 0 && (
-                                <p className="text-sm">
-                                    Grants proficiency:{" "}
-                                    {characterClass.multiClassing.proficiencies.map((p) => p.name).join(", ")}
-                                </p>
-                            )}
-
-                        {characterClass.multiClassing.proficiencyChoices?.map((choice, i) => (
-                            <ChoiceText key={i} choice={choice} />
-                        ))}
-                    </div>
-                )}
-
-                {characterClass.spellcasting && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Spellcasting</h2>
-                        <p className="text-sm">
-                            <span className="font-medium">Ability:</span>{" "}
-                            {characterClass.spellcasting.spellcastingAbility.name}
-                        </p>
-                        {characterClass.spellcasting.info.map((info, i) => (
-                            <div key={i} className="mt-2">
-                                <p className="text-sm font-medium">{info.name}</p>
-                                <p className="text-sm text-muted-foreground">{info.desc.join(" ")}</p>
-                            </div>
-                        ))}
-                    </div>
-                )}
-
-                <div>
-                    <h2 className="font-semibold mb-2">Class Features by Level</h2>
-                    <LevelsList className={characterClass.name} />
-                </div>
-
-                {characterClass.subclasses.length > 0 && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Subclasses</h2>
-                        <SubclassesList subclassIndexes={characterClass.subclasses.map((s) => s.index)} />
-                    </div>
-                )}
-
-            </Card>
+                </Card>
+            </div>
         </div>
     )
 }
