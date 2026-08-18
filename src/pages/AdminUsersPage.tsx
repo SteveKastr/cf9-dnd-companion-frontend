@@ -47,42 +47,48 @@ export default function AdminUsersPage() {
     }
 
     return (
-        <div className="p-4 max-w-3xl mx-auto space-y-4">
-            <h1 className="text-2xl font-bold mb-4">Users</h1>
+        <div className="relative min-h-screen">
+            <div
+                className="fixed inset-0 -z-10 bg-cover bg-center"
+                style={{ backgroundImage: "url(/images/users-bg.jpg)" }}
+            />
+            <div className="p-4 max-w-3xl mx-auto space-y-4">
+                <h1 className="text-2xl font-bold mb-4 inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">Users</h1>
 
-            {users.map((user) => (
-                <Card key={user.id} className="p-4 flex items-center justify-between">
-                    <div>
-                        <p className="font-semibold">{user.username}</p>
-                        <p className="text-sm text-muted-foreground">
-                            {user.firstName} {user.lastName} — {user.email}
-                        </p>
-                        <p className="text-sm">{user.role}</p>
-                    </div>
+                {users.map((user) => (
+                    <Card key={user.id} className="p-4 flex items-center justify-between">
+                        <div>
+                            <p className="font-semibold">{user.username}</p>
+                            <p className="text-sm text-muted-foreground">
+                                {user.firstName} {user.lastName} — {user.email}
+                            </p>
+                            <p className="text-sm">{user.role}</p>
+                        </div>
 
-                    <AlertDialog>
-                        <AlertDialogTrigger asChild>
-                            <Button variant="destructive">Delete</Button>
-                        </AlertDialogTrigger>
-                        <AlertDialogContent>
-                            <AlertDialogHeader>
-                                <AlertDialogTitle>
-                                    Do you want to delete user with username: "{user.username}"?
-                                </AlertDialogTitle>
-                                <AlertDialogDescription>
-                                    This action cannot be undone. This will permanently delete the user account.
-                                </AlertDialogDescription>
-                            </AlertDialogHeader>
-                            <AlertDialogFooter>
-                                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                                <AlertDialogAction onClick={() => deleteMutation.mutate(user.id)}>
-                                    Delete
-                                </AlertDialogAction>
-                            </AlertDialogFooter>
-                        </AlertDialogContent>
-                    </AlertDialog>
-                </Card>
-            ))}
+                        <AlertDialog>
+                            <AlertDialogTrigger asChild>
+                                <Button variant="destructive">Delete</Button>
+                            </AlertDialogTrigger>
+                            <AlertDialogContent>
+                                <AlertDialogHeader>
+                                    <AlertDialogTitle>
+                                        Do you want to delete user with username: "{user.username}"?
+                                    </AlertDialogTitle>
+                                    <AlertDialogDescription>
+                                        This action cannot be undone. This will permanently delete the user account.
+                                    </AlertDialogDescription>
+                                </AlertDialogHeader>
+                                <AlertDialogFooter>
+                                    <AlertDialogCancel>Cancel</AlertDialogCancel>
+                                    <AlertDialogAction onClick={() => deleteMutation.mutate(user.id)}>
+                                        Delete
+                                    </AlertDialogAction>
+                                </AlertDialogFooter>
+                            </AlertDialogContent>
+                        </AlertDialog>
+                    </Card>
+                ))}
+            </div>
         </div>
     )
 }
