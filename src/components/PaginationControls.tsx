@@ -27,7 +27,7 @@ export function PaginationControls({ currentPage, totalPages, onPageChange }: Pa
                 Previous
             </Button>
 
-            <span className="text-sm px-2">
+            <span className="text-sm font-bold text-black bg-white px-3 py-1.5 rounded-md">
         Page {currentPage + 1} of {totalPages}
       </span>
 

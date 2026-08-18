@@ -28,51 +28,57 @@ export default function RaceDetailPage() {
     }
 
     return (
-        <div className="p-4 max-w-3xl mx-auto space-y-6">
-            <Link to="/races">
-                <Button variant="secondary">&larr; Back to Races</Button>
-            </Link>
+        <div className="relative min-h-screen">
+            <div
+                className="fixed inset-0 -z-10 bg-cover bg-center"
+                style={{ backgroundImage: "url(/images/races-bg.jpg)" }}
+            />
+            <div className="p-4 max-w-3xl mx-auto space-y-6">
+                <Link to="/races">
+                    <Button variant="secondary">&larr; Back to Races</Button>
+                </Link>
 
-            <Card className="p-6 space-y-4">
-                <h1 className="text-3xl font-bold">{race.name}</h1>
+                <Card className="p-6 space-y-4">
+                    <h1 className="text-3xl font-bold">{race.name}</h1>
 
-                <div className="grid grid-cols-2 gap-4 text-sm">
-                    <p><span className="font-semibold">Size:</span> {race.size}</p>
-                    <p><span className="font-semibold">Speed:</span> {race.speed} ft.</p>
-                    <p><span className="font-semibold">Age:</span> {race.age}</p>
-                    <p><span className="font-semibold">Alignment:</span> {race.alignment}</p>
-                </div>
-
-                <div>
-                    <h2 className="font-semibold mb-2">Ability Bonuses</h2>
-                    <ul className="list-disc list-inside text-sm">
-                        {race.abilityBonuses.map((bonus, i) => (
-                            <li key={i}>
-                                {bonus.abilityScore.name} +{bonus.bonus}
-                            </li>
-                        ))}
-                    </ul>
-                </div>
-
-                <div>
-                    <h2 className="font-semibold mb-2">Languages</h2>
-                    <p className="text-sm">{race.languageDesc}</p>
-                </div>
-
-                {race.traits.length > 0 && (
-                    <div>
-                        <h2 className="font-semibold mb-2">Traits</h2>
-                        <TraitsList traitIndexes={race.traits.map((t) => t.index)} />
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                        <p><span className="font-semibold">Size:</span> {race.size}</p>
+                        <p><span className="font-semibold">Speed:</span> {race.speed} ft.</p>
+                        <p><span className="font-semibold">Age:</span> {race.age}</p>
+                        <p><span className="font-semibold">Alignment:</span> {race.alignment}</p>
                     </div>
-                )}
 
-                {race.subraces.length > 0 && (
                     <div>
-                        <h2 className="font-semibold mb-2">Subraces</h2>
-                        <SubracesList subraceIndexes={race.subraces.map((s) => s.index)} />
+                        <h2 className="font-semibold mb-2">Ability Bonuses</h2>
+                        <ul className="list-disc list-inside text-sm">
+                            {race.abilityBonuses.map((bonus, i) => (
+                                <li key={i}>
+                                    {bonus.abilityScore.name} +{bonus.bonus}
+                                </li>
+                            ))}
+                        </ul>
                     </div>
-                )}
-            </Card>
+
+                    <div>
+                        <h2 className="font-semibold mb-2">Languages</h2>
+                        <p className="text-sm">{race.languageDesc}</p>
+                    </div>
+
+                    {race.traits.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Traits</h2>
+                            <TraitsList traitIndexes={race.traits.map((t) => t.index)} />
+                        </div>
+                    )}
+
+                    {race.subraces.length > 0 && (
+                        <div>
+                            <h2 className="font-semibold mb-2">Subraces</h2>
+                            <SubracesList subraceIndexes={race.subraces.map((s) => s.index)} />
+                        </div>
+                    )}
+                </Card>
+            </div>
         </div>
     )
 }
