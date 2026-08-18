@@ -30,20 +30,26 @@ export default function RuleDetailPage() {
     }
 
     return (
-        <div className="p-4 max-w-3xl mx-auto space-y-6">
-            <Button variant="secondary" onClick={() => navigate(-1)}>
-                &larr; Back
-            </Button>
+        <div className="relative min-h-screen">
+            <div
+                className="fixed inset-0 -z-10 bg-cover bg-center"
+                style={{ backgroundImage: "url(/images/rules-bg.jpg)" }}
+            />
+            <div className="p-4 max-w-3xl mx-auto space-y-6">
+                <Button variant="secondary" onClick={() => navigate(-1)}>
+                    &larr; Back
+                </Button>
 
-            <Card className="p-6 space-y-6">
-                <div className="prose prose-sm max-w-none">
-                    <ReactMarkdown remarkPlugins={[remarkGfm]}>{rule.desc}</ReactMarkdown>
-                </div>
+                <Card className="p-6 space-y-6">
+                    <div className="prose prose-sm max-w-none">
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{rule.desc}</ReactMarkdown>
+                    </div>
 
-                {rule.subsections.length > 0 && (
-                    <RuleSectionsList sectionIndexes={rule.subsections.map((s) => s.index)} />
-                )}
-            </Card>
+                    {rule.subsections.length > 0 && (
+                        <RuleSectionsList sectionIndexes={rule.subsections.map((s) => s.index)} />
+                    )}
+                </Card>
+            </div>
         </div>
     )
 }

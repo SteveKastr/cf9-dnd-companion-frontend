@@ -73,7 +73,7 @@ export default function MonstersPage() {
                 style={{ backgroundImage: "url(/images/monsters-bg.jpg)" }}
             />
             <div className="p-4">
-                <h1 className="text-2xl font-bold mb-4">Monsters</h1>
+                <h1 className="text-2xl font-bold mb-4 inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">Monsters</h1>
 
                 <div className="flex flex-wrap gap-4 mb-6">
                     <Input

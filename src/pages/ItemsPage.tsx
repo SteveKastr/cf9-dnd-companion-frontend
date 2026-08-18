@@ -66,7 +66,7 @@ export default function ItemsPage() {
                 style={{ backgroundImage: "url(/images/items-bg.jpg)" }}
             />
             <div className="p-4">
-                <h1 className="text-2xl font-bold mb-4">Items</h1>
+                <h1 className="text-2xl font-bold mb-4 inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">Items</h1>
 
                 <div className="flex gap-4 mb-6">
                     <select
