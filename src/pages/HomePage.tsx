@@ -36,41 +36,47 @@ export default function HomePage() {
     }
 
     return (
-        <div className="flex gap-8 p-4">
-            <aside className="hidden lg:flex flex-col items-center justify-center w-64 shrink-0 text-center gap-4">
-                <h1 className="text-3xl font-bold">D&D Companion</h1>
-                <FontAwesomeIcon icon={faDragon} className="text-6xl text-slate-700" />
-            </aside>
+        <div className="relative min-h-screen">
+            <div
+                className="fixed inset-0 -z-10 bg-cover bg-center"
+                style={{ backgroundImage: "url(/images/home-page-bg.jpg)" }}
+            />
+            <div className="flex gap-8 p-4">
+                <aside className="hidden lg:flex flex-col items-center justify-center w-64 shrink-0 text-center gap-4">
+                    <h1 className="text-3xl font-bold text-red-800">D&D Companion</h1>
+                    <FontAwesomeIcon icon={faDragon} className="text-6xl text-red-800" />
+                </aside>
 
-            <div className="flex-1 space-y-8">
-                {!isAuthenticated && (
-                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-                        <Card className="p-6 space-y-4">
-                            <h2 className="text-xl font-semibold text-center">Login</h2>
-                            <LoginForm />
-                        </Card>
-                        <Card className="p-6 space-y-4">
-                            <h2 className="text-xl font-semibold text-center">Register</h2>
-                            <RegisterForm />
-                        </Card>
-                    </div>
-                )}
-
-                {isAuthenticated && (
-                    <>
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {primaryCards.map((card) => (
-                                <NavCardItem key={card.to} card={card} />
-                            ))}
+                <div className="flex-1 space-y-8">
+                    {!isAuthenticated && (
+                        <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                            <Card className="p-6 space-y-4">
+                                <h2 className="text-xl font-semibold text-center">Login</h2>
+                                <LoginForm />
+                            </Card>
+                            <Card className="p-6 space-y-4">
+                                <h2 className="text-xl font-semibold text-center">Register</h2>
+                                <RegisterForm />
+                            </Card>
                         </div>
+                    )}
 
-                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                            {secondaryCards.map((card) => (
-                                <NavCardItem key={card.to} card={card} />
-                            ))}
-                        </div>
-                    </>
-                )}
+                    {isAuthenticated && (
+                        <>
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {primaryCards.map((card) => (
+                                    <NavCardItem key={card.to} card={card} />
+                                ))}
+                            </div>
+
+                            <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                {secondaryCards.map((card) => (
+                                    <NavCardItem key={card.to} card={card} />
+                                ))}
+                            </div>
+                        </>
+                    )}
+                </div>
             </div>
         </div>
     )
