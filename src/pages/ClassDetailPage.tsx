@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useQuery, useQueries } from "@tanstack/react-query"
 import { getClassByIndex } from "@/api/classes.ts"
 import { getSubclassByIndex } from "@/api/subclasses.ts"
@@ -10,6 +10,7 @@ import type { LevelSpellcasting } from "@/types/level.ts"
 
 export default function ClassDetailPage() {
     const { classIndex } = useParams<{ classIndex: string }>()
+    const navigate = useNavigate()
 
     const { data: characterClass, isLoading, error } = useQuery({
         queryKey: ["classes", classIndex],
@@ -36,9 +37,9 @@ export default function ClassDetailPage() {
                 style={{ backgroundImage: "url(/images/classes-bg.jpg)" }}
             />
             <div className="p-4 max-w-3xl mx-auto space-y-6">
-                <Link to="/classes">
-                    <Button variant="secondary">&larr; Back to Classes</Button>
-                </Link>
+                <Button variant="secondary" onClick={() => navigate(-1)}>
+                    &larr; Back
+                </Button>
 
                 <Card className="p-6 space-y-4">
                     <h1 className="text-3xl font-bold">{characterClass.name}</h1>
@@ -179,7 +180,7 @@ function SubclassesList({ subclassIndexes }: { subclassIndexes: string[] }) {
                 }
                 const subclass = query.data
                 return (
-                    <div key={subclass.index} className="border-l-2 pl-3 space-y-2">
+                    <div key={subclass.index} className="border-l-2 border-green-800 pl-3 space-y-1">
                         <h3 className="font-semibold">{subclass.name}</h3>
                         <p className="text-sm text-muted-foreground italic">{subclass.subclassFlavor}</p>
                         <p className="text-sm">{subclass.desc.join(" ")}</p>
@@ -214,7 +215,7 @@ function SubclassLevelsList({ subclassName }: { subclassName: string }) {
             {levels
                 .sort((a, b) => a.level - b.level)
                 .map((lvl) => (
-                    <div key={lvl.index} className="border-l-2 pl-3 space-y-1">
+                    <div key={lvl.index} className="border-l-2 border-green-800 pl-3 space-y-1">
                         <h5 className="font-medium text-sm">Level {lvl.level}</h5>
 
                         {lvl.features.length > 0 && (
@@ -249,7 +250,7 @@ function LevelsList({ className }: { className: string }) {
             {levels
                 .sort((a, b) => a.level - b.level)
                 .map((lvl) => (
-                    <div key={lvl.index} className="border-l-2 pl-3 space-y-1">
+                    <div key={lvl.index} className="border-l-2 border-green-800 pl-3 space-y-1">
                         <h3 className="font-semibold">
                             Level {lvl.level}
                             {lvl.profBonus !== undefined ? ` (Proficiency Bonus +${lvl.profBonus})` : ""}

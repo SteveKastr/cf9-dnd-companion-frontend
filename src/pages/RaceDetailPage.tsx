@@ -1,4 +1,4 @@
-import { useParams, Link } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 import { useQuery, useQueries } from "@tanstack/react-query"
 import { getRaceByIndex } from "@/api/races.ts"
 import { getTraitByIndex } from "@/api/traits.ts"
@@ -8,6 +8,7 @@ import { getSubraceByIndex } from "@/api/subraces.ts"
 
 export default function RaceDetailPage() {
     const { raceIndex } = useParams<{ raceIndex: string }>()
+    const navigate = useNavigate()
 
     const { data: race, isLoading, error } = useQuery({
         queryKey: ["races", raceIndex],
@@ -34,9 +35,9 @@ export default function RaceDetailPage() {
                 style={{ backgroundImage: "url(/images/races-bg.jpg)" }}
             />
             <div className="p-4 max-w-3xl mx-auto space-y-6">
-                <Link to="/races">
-                    <Button variant="secondary">&larr; Back to Races</Button>
-                </Link>
+                <Button variant="secondary" onClick={() => navigate(-1)}>
+                    &larr; Back
+                </Button>
 
                 <Card className="p-6 space-y-4">
                     <h1 className="text-3xl font-bold">{race.name}</h1>
