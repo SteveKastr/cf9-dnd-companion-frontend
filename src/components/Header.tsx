@@ -10,6 +10,8 @@ import {
     DropdownMenuSeparator,
     DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu.tsx"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faUser } from "@fortawesome/free-solid-svg-icons"
 
 const Header = () => {
     const { isAuthenticated, role } = useAuth()
@@ -22,6 +24,13 @@ const Header = () => {
                 </Link>
 
                 <div className="flex items-center gap-4">
+                    {isAuthenticated && (
+                        <Link to="/my-account">
+                            <Button variant="secondary" size="icon">
+                                <FontAwesomeIcon icon={faUser} />
+                            </Button>
+                        </Link>
+                    )}
                     <DropdownMenu>
                         <DropdownMenuTrigger asChild>
                             <Button variant="secondary" size="icon">
@@ -37,13 +46,16 @@ const Header = () => {
                                 <>
                                     <DropdownMenuSeparator />
                                     <DropdownMenuItem asChild>
+                                        <Link to="/my-account">My Account</Link>
+                                    </DropdownMenuItem>
+                                    <DropdownMenuItem asChild>
                                         <Link to="/races">Races</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
-                                        <Link to="/spells">Spells</Link>
+                                        <Link to="/classes">Classes</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
-                                        <Link to="/classes">Classes</Link>
+                                        <Link to="/spells">Spells</Link>
                                     </DropdownMenuItem>
                                     <DropdownMenuItem asChild>
                                         <Link to="/items">Items</Link>
@@ -54,6 +66,7 @@ const Header = () => {
                                     <DropdownMenuItem asChild>
                                         <Link to="/rules">Rules</Link>
                                     </DropdownMenuItem>
+
 
                                     {(role === "ADMIN" || role === "GAME_MASTER") && (
                                         <DropdownMenuItem asChild>

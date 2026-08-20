@@ -25,6 +25,7 @@ export default function HomePage() {
         { to: "/items", title: "Items", description: "Browse equipment and magic items" },
         { to: "/backgrounds-feats", title: "Backgrounds / Feats", description: "Character building reference" },
         { to: "/rules", title: "Rules", description: "Reference for game rules" },
+        { to: "/my-account", title: "My Account", description: "View and manage your account" },
     ]
 
     if (role === "ADMIN" || role === "GAME_MASTER") {
