@@ -2,7 +2,7 @@ import { Link } from "react-router-dom"
 import { AuthButton } from "@/components/AuthButton.tsx"
 import { useAuth } from "@/context/AuthContext.ts"
 import { Button } from "@/components/ui/button.tsx"
-import { Menu } from "lucide-react"
+import { Menu, Home } from "lucide-react"
 import {
     DropdownMenu,
     DropdownMenuContent,
@@ -19,7 +19,8 @@ const Header = () => {
     return (
         <header className="bg-slate-900 fixed w-full z-50">
             <div className="container mx-auto px-4 flex items-center justify-between py-4">
-                <Link to="/" className="text-white font-bold text-xl">
+                <Link to="/" className="text-white font-bold text-xl flex items-center gap-2">
+                    <Home className="h-5 w-5" />
                     D&D Companion
                 </Link>
 
@@ -37,7 +38,7 @@ const Header = () => {
                                 <Menu className="h-5 w-5" />
                             </Button>
                         </DropdownMenuTrigger>
-                        <DropdownMenuContent align="end">
+                        <DropdownMenuContent align="end" className="border-2 border-red-800">
                             <DropdownMenuItem asChild>
                                 <Link to="/">Home</Link>
                             </DropdownMenuItem>

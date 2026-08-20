@@ -1,4 +1,5 @@
 import { RegisterForm } from "@/components/RegisterForm.tsx"
+import { Card } from "@/components/ui/card.tsx"
 
 export default function RegisterPage() {
     return (
@@ -8,9 +9,11 @@ export default function RegisterPage() {
                 style={{ backgroundImage: "url(/images/home-page-bg.jpg)" }}
             />
 
-            <div className="max-w-md mx-auto p-8 pt-16 space-y-6 border rounded bg-white shadow">
-                <h1 className="text-2xl font-bold text-center">Register</h1>
-                <RegisterForm />
+            <div className="max-w-md mx-auto p-4 pt-16">
+                <Card className="p-6 space-y-6">
+                    <h1 className="text-2xl font-bold text-center">Register</h1>
+                    <RegisterForm />
+                </Card>
             </div>
         </div>
     )

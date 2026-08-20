@@ -28,7 +28,7 @@ export default function CharacterBuildingPage() {
                         Backgrounds
                     </h2>
                     {loadingBackgrounds && (
-                        <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                        <p className="mt-2 bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md w-fit">
                             Loading...
                         </p>
                     )}
@@ -78,7 +78,7 @@ export default function CharacterBuildingPage() {
                         Feats
                     </h2>
                     {loadingFeats && (
-                        <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                        <p className="mt-2 bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md w-fit">
                             Loading...
                         </p>
                     )}
