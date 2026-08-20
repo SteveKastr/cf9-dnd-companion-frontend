@@ -86,7 +86,7 @@ export default function MonstersPage() {
                     <select
                         value={typeFilter}
                         onChange={(e) => handleTypeChange(e.target.value)}
-                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm cursor-pointer"
                     >
                         <option value="">All Types</option>
                         {MONSTER_TYPES.map((t) => (
@@ -99,7 +99,7 @@ export default function MonstersPage() {
                     <select
                         value={crFilter}
                         onChange={(e) => handleCrChange(e.target.value)}
-                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm cursor-pointer"
                     >
                         <option value="">All Challenge Ratings</option>
                         {CHALLENGE_RATINGS.map((cr) => (
@@ -110,10 +110,14 @@ export default function MonstersPage() {
                     </select>
                 </div>
 
-                {isLoading && <p>Loading monsters...</p>}
+                {isLoading && (
+                    <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                        Loading monsters...
+                    </p>
+                )}
 
                 {error && (
-                    <p className="text-red-600">
+                    <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                         Error: {error instanceof Error ? error.message : "Failed to load monsters"}
                     </p>
                 )}
@@ -135,7 +139,9 @@ export default function MonstersPage() {
                         </div>
 
                         {data.content.length === 0 && (
-                            <p className="text-muted-foreground">No monsters found matching these filters.</p>
+                            <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                                No monsters found matching these filters.
+                            </p>
                         )}
 
                         <PaginationControls

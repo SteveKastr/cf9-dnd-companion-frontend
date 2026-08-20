@@ -10,12 +10,16 @@ export default function ClassesPage() {
     })
 
     if (isLoading) {
-        return <p className="p-4">Loading classes...</p>
+        return (
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                Loading classes...
+            </p>
+        )
     }
 
-    if (error) {
+    if (error || !classes) {
         return (
-            <p className="p-4 text-red-600">
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                 Error: {error instanceof Error ? error.message : "Failed to load classes"}
             </p>
         )

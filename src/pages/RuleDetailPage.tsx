@@ -18,12 +18,16 @@ export default function RuleDetailPage() {
     })
 
     if (isLoading) {
-        return <p className="p-4">Loading rule...</p>
+        return (
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                Loading rule...
+            </p>
+        )
     }
 
     if (error || !rule) {
         return (
-            <p className="p-4 text-red-600">
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                 Error: {error instanceof Error ? error.message : "Rule not found"}
             </p>
         )

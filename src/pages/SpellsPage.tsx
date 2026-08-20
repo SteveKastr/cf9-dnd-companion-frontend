@@ -68,7 +68,7 @@ export default function SpellsPage() {
                     <select
                         value={levelFilter}
                         onChange={(e) => handleLevelChange(e.target.value)}
-                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm cursor-pointer"
                     >
                         <option value="">All Levels</option>
                         {SPELL_LEVELS.map((lvl) => (
@@ -81,7 +81,7 @@ export default function SpellsPage() {
                     <select
                         value={classFilter}
                         onChange={(e) => handleClassChange(e.target.value)}
-                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm cursor-pointer"
                     >
                         <option value="">All Classes</option>
                         {classes?.map((cls) => (
@@ -92,10 +92,14 @@ export default function SpellsPage() {
                     </select>
                 </div>
 
-                {isLoading && <p>Loading spells...</p>}
+                {isLoading && (
+                    <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                        Loading spells...
+                    </p>
+                )}
 
                 {error && (
-                    <p className="text-red-600">
+                    <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                         Error: {error instanceof Error ? error.message : "Failed to load spells"}
                     </p>
                 )}
@@ -117,7 +121,9 @@ export default function SpellsPage() {
                         </div>
 
                         {data.content.length === 0 && (
-                            <p className="text-red-800 font-semibold bg-amber-50 inline-block px-3 py-1.5 rounded-md">No spells found matching these filters.</p>
+                            <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                                No spells found matching these filters.
+                            </p>
                         )}
 
                         <PaginationControls

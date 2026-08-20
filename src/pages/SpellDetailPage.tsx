@@ -15,12 +15,16 @@ export default function SpellDetailPage() {
     })
 
     if (isLoading) {
-        return <p className="p-4">Loading spell...</p>
+        return (
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                Loading spell...
+            </p>
+        )
     }
 
     if (error || !spell) {
         return (
-            <p className="p-4 text-red-600">
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                 Error: {error instanceof Error ? error.message : "Spell not found"}
             </p>
         )

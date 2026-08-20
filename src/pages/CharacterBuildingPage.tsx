@@ -24,8 +24,14 @@ export default function CharacterBuildingPage() {
                 <h1 className="text-2xl font-bold inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">Backgrounds & Feats</h1>
 
                 <section className="space-y-4">
-                    <h2 className="text-xl font-semibold">Backgrounds</h2>
-                    {loadingBackgrounds && <p className="text-sm text-muted-foreground">Loading...</p>}
+                    <h2 className="text-xl font-semibold inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">
+                        Backgrounds
+                    </h2>
+                    {loadingBackgrounds && (
+                        <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                            Loading...
+                        </p>
+                    )}
                     {backgrounds?.map((bg) => (
                         <Card key={bg.id} className="p-6 space-y-3">
                             <h3 className="text-lg font-semibold">{bg.name}</h3>
@@ -68,8 +74,14 @@ export default function CharacterBuildingPage() {
                 </section>
 
                 <section className="space-y-4">
-                    <h2 className="text-xl font-semibold">Feats</h2>
-                    {loadingFeats && <p className="text-sm text-muted-foreground">Loading...</p>}
+                    <h2 className="text-xl font-semibold inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">
+                        Feats
+                    </h2>
+                    {loadingFeats && (
+                        <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                            Loading...
+                        </p>
+                    )}
                     {feats?.map((feat) => (
                         <Card key={feat.id} className="p-6 space-y-3">
                             <h3 className="text-lg font-semibold">{feat.name}</h3>

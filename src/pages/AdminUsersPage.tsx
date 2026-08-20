@@ -35,12 +35,16 @@ export default function AdminUsersPage() {
     })
 
     if (isLoading) {
-        return <p className="p-4">Loading users...</p>
+        return (
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                Loading users...
+            </p>
+        )
     }
 
     if (error || !users) {
         return (
-            <p className="p-4 text-red-600">
+            <p className="p-4 inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                 Error: {error instanceof Error ? error.message : "Failed to load users"}
             </p>
         )
@@ -56,8 +60,8 @@ export default function AdminUsersPage() {
                 <h1 className="text-2xl font-bold mb-4 inline-block bg-amber-50 text-red-800 px-4 py-2 rounded-md">Users</h1>
 
                 {users.map((user) => (
-                    <Card key={user.id} className="p-4 flex items-center justify-between">
-                        <div>
+                    <Card key={user.id} className="p-4 flex flex-row items-center justify-between gap-4">
+                        <div className="text-left">
                             <p className="font-semibold">{user.username}</p>
                             <p className="text-sm text-muted-foreground">
                                 {user.firstName} {user.lastName} — {user.email}

@@ -72,7 +72,7 @@ export default function ItemsPage() {
                     <select
                         value={categoryFilter}
                         onChange={(e) => handleCategoryChange(e.target.value)}
-                        className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                        className="rounded-md border border-input bg-white px-3 py-2 text-sm cursor-pointer"
                     >
                         <option value="">All Categories</option>
                         {EQUIPMENT_CATEGORIES.map((cat) => (
@@ -86,7 +86,7 @@ export default function ItemsPage() {
                         <select
                             value={typeFilter}
                             onChange={(e) => handleTypeChange(e.target.value)}
-                            className="rounded-md border border-input bg-white px-3 py-2 text-sm"
+                            className="rounded-md border border-input bg-white px-3 py-2 text-sm cursor-pointer"
                         >
                             <option value="">All Types</option>
                             <option value="mundane">Mundane</option>
@@ -95,10 +95,14 @@ export default function ItemsPage() {
                     )}
                 </div>
 
-                {isLoading && <p>Loading items...</p>}
+                {isLoading && (
+                    <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                        Loading items...
+                    </p>
+                )}
 
                 {error && (
-                    <p className="text-red-600">
+                    <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
                         Error: {error instanceof Error ? error.message : "Failed to load items"}
                     </p>
                 )}
@@ -120,7 +124,9 @@ export default function ItemsPage() {
                         </div>
 
                         {data.content.length === 0 && (
-                            <p className="text-muted-foreground">No items found matching these filters.</p>
+                            <p className="inline-block bg-amber-50 text-red-800 font-semibold px-4 py-2 rounded-md">
+                                No items found matching these filters.
+                            </p>
                         )}
 
                         <PaginationControls
