@@ -21,6 +21,12 @@ import RuleDetailPage from "@/pages/RuleDetailPage.tsx"
 import AdminUsersPage from "@/pages/AdminUsersPage.tsx"
 import MyAccountPage from "@/pages/MyAccountPage.tsx"
 
+/**
+ * Application route tree. All routes except Home/Login/Register require
+ * authentication (ProtectedRoute). Monsters additionally require
+ * Admin/GameMaster role, and Admin Users requires Admin specifically.
+ */
+
 function App() {
     return (
         <Routes>
