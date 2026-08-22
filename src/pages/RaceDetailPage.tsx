@@ -138,7 +138,7 @@ function SubracesList({ subraceIndexes }: { subraceIndexes: string[] }) {
                 }
                 const subrace = query.data
                 return (
-                    <div key={subrace.index} className="border-l-2 pl-3 space-y-2">
+                    <div key={subrace.index} className="border-l-2 border-green-800 pl-3 space-y-2">
                         <h3 className="font-semibold">{subrace.name}</h3>
                         <p className="text-sm text-muted-foreground">{subrace.desc}</p>
 
