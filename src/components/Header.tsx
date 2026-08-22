@@ -13,6 +13,12 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
 
+/**
+ * Site header with logo/home link, quick "My Account" shortcut,
+ * and a hamburger dropdown menu with role-based navigation links
+ * (Monsters requires Admin/GameMaster, Users requires Admin).
+ */
+
 const Header = () => {
     const { isAuthenticated, role } = useAuth()
 

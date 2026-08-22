@@ -2,6 +2,13 @@ import type { LoginFields, RegisterFields, AuthResponse } from "@/schemas/auth.t
 
 const API_URL = import.meta.env.VITE_API_URL
 
+/**
+ * Uses its own fetch logic (not the shared apiFetch helper) because
+ * register's error handling needs to surface multiple validation
+ * messages (the "details" array from MethodArgumentNotValidException),
+ * which apiFetch doesn't currently support.
+ */
+
 export async function login({ username, password }: LoginFields): Promise<AuthResponse> {
     const res = await fetch(API_URL + "/auth/login", {
         method: "POST",

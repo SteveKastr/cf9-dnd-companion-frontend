@@ -1,5 +1,12 @@
 import type { ApiReference } from "@/types/common.ts"
 
+/**
+ * NOTE: spell_slots_level_X fields use snake_case (not camelCase) because
+ * the backend's Level.classSpecific/LevelSpellcasting are typed with
+ * explicit @JsonProperty annotations that don't follow the usual
+ * camelCase API convention — see backend Level.java for details.
+ */
+
 export type LevelSpellcasting = {
     cantripsKnown?: number
     spell_slots_level_1: number

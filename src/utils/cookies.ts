@@ -1,5 +1,10 @@
 import Cookies from 'js-cookie'
 
+/**
+ * Thin wrapper around js-cookie, used for storing/reading/removing the
+ * JWT access token cookie throughout the app.
+ */
+
 export function setCookie(
     name: string,
     value: string,

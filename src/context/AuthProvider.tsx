@@ -5,6 +5,13 @@ import { login, register } from "@/api/auth.ts"
 import { AuthContext } from "@/context/AuthContext.ts"
 import type { LoginFields, RegisterFields, AuthResponse } from "@/schemas/auth.ts"
 
+/**
+ * Provides authentication state and actions to the entire app. Reads the
+ * JWT token from a cookie on initial load (so a page refresh doesn't log
+ * the user out), and decodes the username/role directly from the token
+ * payload rather than making an extra API call.
+ */
+
 type Role = "ADMIN" | "GAME_MASTER" | "PLAYER"
 type JwtPayload = { sub: string; role: Role }
 

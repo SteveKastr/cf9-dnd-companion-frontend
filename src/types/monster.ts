@@ -1,5 +1,14 @@
 import type { ApiReference } from "@/types/common.ts"
 
+/**
+ * NOTE: MonsterAction and its nested types (ActionDamage, ActionDC) use
+ * snake_case field names (attack_bonus, damage_type, dc_value, etc.)
+ * because the backend stores these as generic Objects — Jackson's
+ * SNAKE_CASE naming strategy doesn't apply to nested Map/Object fields,
+ * so the original JSON keys are preserved as-is. Mixing this up with
+ * camelCase caused a runtime crash early in development (see git history).
+ */
+
 export type ArmorClassEntry = {
     type: string
     value: number
